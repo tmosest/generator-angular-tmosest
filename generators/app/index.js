@@ -28,20 +28,39 @@ module.exports = Generator.extend({
     var done = this.async();
     this.prompt(prompts)
     .then(function (answers) {
+      this.props = answers;
       this.log('name: ', answers.name);
-      this.log('angular: ', answers.angular2);
+      this.log('angular: ', answers.angular);
       done();
     }.bind(this));
   },
 
-  writing: function () {
-    /*this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );*/
+  writing: {
+    // Copy Configuration files
+    config: function() {
+      // Pakcage.json
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'), {
+          name: this.props.name
+        }
+      );
+      // Bower
+      this.fs.copyTpl(
+        this.templatePath('_bower.json'),
+        this.destinationPath('bower.json'), {
+          name: this.props.name,
+          angular: this.props.angular
+        }
+      );
+      this.fs.copy(
+        this.templatePath('bowerrc'),
+        this.destinationPath('.bowerrc')
+      );
+    },
   },
 
   install: function () {
-    //this.installDependencies();
+    this.installDependencies();
   }
 });

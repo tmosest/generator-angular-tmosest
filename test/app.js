@@ -4,16 +4,29 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('generator-angular-tmosest:app', function () {
-  before(function () {
-    return helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true})
-      .toPromise();
+  describe('Creates Configuration Files:', function ()  {
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
+        .withPrompts({name: "test_project", angular: '1.6'})
+        .toPromise();
+    });
+
+    it('creates a Package.json file', function () {
+      assert.file([
+        'package.json'
+      ]);
+    });
+
+    it('creates a bower.json file', function () {
+      assert.file([
+        'bower.json'
+      ]);
+    });
+
+    it('creates bowerrc file', function () {
+      assert.file([
+        '.bowerrc'
+      ]);
+    });
   });
-  /*
-  it('creates files', function () {
-    assert.file([
-      'dummyfile.txt'
-    ]);
-  });
-  */
 });
