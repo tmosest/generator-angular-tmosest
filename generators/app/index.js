@@ -21,7 +21,7 @@ module.exports = Generator.extend({
         type: 'rawList',
         name: 'angular',
         message: 'What Version of Angular would you like to use?',
-        choices: ['1.6', '2.0']
+        choices: ['1.6', '2.0'],
         defualt: '1.6'
       }
     ];
