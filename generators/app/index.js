@@ -23,6 +23,12 @@ module.exports = Generator.extend({
         message: 'What Version of Angular would you like to use?',
         choices: ['1.6', '2.0'],
         defualt: '1.6'
+      },
+      {
+        type: 'confirm',
+        name: 'jquery',
+        message: 'Would you like to include jQuery?',
+        default: true
       }
     ];
     var done = this.async();
@@ -62,5 +68,8 @@ module.exports = Generator.extend({
 
   install: function () {
     this.installDependencies();
+    if(this.props.jquery === true) {
+      generator.bowerInstall(['bootstrap'], { 'save': true });
+    }
   }
 });
