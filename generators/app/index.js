@@ -40,10 +40,9 @@ module.exports = Generator.extend({
       done();
     }.bind(this));
   },
-
   writing: {
     // Copy Configuration files
-    config: function() {
+    config: function () {
       // Pakcage.json
       this.fs.copyTpl(
         this.templatePath('_package.json'),
@@ -63,13 +62,12 @@ module.exports = Generator.extend({
         this.templatePath('bowerrc'),
         this.destinationPath('.bowerrc')
       );
-    },
+    }
   },
-
   install: function () {
     this.installDependencies();
-    if(this.props.jquery === true) {
-      generator.bowerInstall(['bootstrap'], { 'save': true });
+    if (this.props.jquery === true) {
+      this.bowerInstall(['jquery'], {save: true});
     }
   }
 });

@@ -4,10 +4,10 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('generator-angular-tmosest:app', function () {
-  describe('Creates Configuration Files:', function ()  {
+  describe('Creates Configuration Files:', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withPrompts({name: "test_project", angular: '1.6'})
+        .withPrompts({name: 'test_project', angular: '1.6'})
         .toPromise();
     });
 
