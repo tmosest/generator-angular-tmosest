@@ -5,7 +5,7 @@ var helpers = require('yeoman-test');
 
 describe('generator-angular-tmosest:app', function () {
   describe('Creates Configuration Files:', function () {
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({name: 'test_project', angular: '1.6'})
         .toPromise();
@@ -27,6 +27,17 @@ describe('generator-angular-tmosest:app', function () {
       assert.file([
         '.bowerrc'
       ]);
+    });
+  });
+  describe('Downloads Different Versions of Bootstrap:', function () {
+    it('Downloads Bootstrap Less', function () {
+      helpers.run(path.join(__dirname, '../generators/app'))
+        .withPrompts({name: 'test_project', angular: '1.6', bootstrap: 'SASS'})
+        .toPromise().then(function () {
+          assert.file([
+            'app/public/libs/bootstrap-less/README.md'
+          ]);
+        });
     });
   });
 });
